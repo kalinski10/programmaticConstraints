@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
 
+// MARK: - UI Elements
+    
     let cameraImageView: UIImageView = {
         
         let cameraButton = "camera_button.png"
@@ -41,7 +43,6 @@ class ViewController: UIViewController {
        
         let button = UIButton(type: .system)
         button.setTitle("PREV", for: .normal)
-//        button.backgroundColor = .red
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
         
@@ -51,11 +52,12 @@ class ViewController: UIViewController {
        
         let button = UIButton(type: .system)
         button.setTitle("NEXT", for: .normal)
-//        button.backgroundColor = .green
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
         
     }()
+    
+// MARK: - Overrides
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,33 +68,36 @@ class ViewController: UIViewController {
         setupBottomControlsLayoyut()
     }
     
+// MARK: - Layout
+    
     private func setupLayout() {
-       // top image view conatiner constraints
+        
         let topImageContainerView = UIView()
         view.addSubview(topImageContainerView)
         topImageContainerView.translatesAutoresizingMaskIntoConstraints = false
         topImageContainerView.addSubview(cameraImageView)
         
         NSLayoutConstraint.activate([
-        topImageContainerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
-        topImageContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-        topImageContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        topImageContainerView.topAnchor.constraint(equalTo: view.topAnchor),
-        
-        // cameraImageView constraints
-        cameraImageView.centerXAnchor.constraint(equalTo: topImageContainerView.centerXAnchor),
-        cameraImageView.centerYAnchor.constraint(equalTo: topImageContainerView.centerYAnchor),
-        cameraImageView.heightAnchor.constraint(equalTo: topImageContainerView.heightAnchor, multiplier: 0.6),
-        
-        // text view constraints
-        firstTextView.topAnchor.constraint(equalTo: topImageContainerView.bottomAnchor),
-        firstTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-        firstTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
-        firstTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            // top image view conatiner constraints
+
+            topImageContainerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
+            topImageContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            topImageContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            topImageContainerView.topAnchor.constraint(equalTo: view.topAnchor),
+            
+            // cameraImageView constraints
+            cameraImageView.centerXAnchor.constraint(equalTo: topImageContainerView.centerXAnchor),
+            cameraImageView.centerYAnchor.constraint(equalTo: topImageContainerView.centerYAnchor),
+            cameraImageView.heightAnchor.constraint(equalTo: topImageContainerView.heightAnchor, multiplier: 0.6),
+            
+            // text view constraints
+            firstTextView.topAnchor.constraint(equalTo: topImageContainerView.bottomAnchor),
+            firstTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            firstTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+            firstTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
             
         ])
 
-    
     }
     
     fileprivate func setupBottomControlsLayoyut() {
@@ -110,6 +115,7 @@ class ViewController: UIViewController {
             bottomControlsStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             bottomControlsStackView.heightAnchor.constraint(equalToConstant: 50),
             bottomControlsStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+            
         ])
         
     }
