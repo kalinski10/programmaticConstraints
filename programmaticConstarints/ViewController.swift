@@ -8,18 +8,21 @@
 
 import UIKit
 
+extension UIColor {
+    
+    static var mainGold = UIColor(red: 207/255, green: 181/255, blue: 59/255, alpha: 1.0)
+    
+}
+
 class ViewController: UIViewController {
 
 // MARK: - UI Elements
     
     let cameraImageView: UIImageView = {
         
-        let cameraButton = "camera_button.png"
-        let firstImage = UIImage(named: cameraButton)
-        let firstImageView = UIImageView(image: firstImage)
+        let firstImageView = UIImageView(image: #imageLiteral(resourceName: "camera_button"))
         firstImageView.contentMode = .scaleAspectFill
         firstImageView.translatesAutoresizingMaskIntoConstraints = false
-        
         return firstImageView
         
     }()
@@ -44,6 +47,8 @@ class ViewController: UIViewController {
         let button = UIButton(type: .system)
         button.setTitle("PREV", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.font = .boldSystemFont(ofSize: 18)
+        button.setTitleColor(.gray, for: .normal)
         return button
         
     }()
@@ -53,7 +58,20 @@ class ViewController: UIViewController {
         let button = UIButton(type: .system)
         button.setTitle("NEXT", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.font = .boldSystemFont(ofSize: 18)
+        button.setTitleColor(.mainGold, for: .normal)
         return button
+        
+    }()
+    
+    private let pageControl: UIPageControl = {
+        
+        let pc = UIPageControl()
+        pc.currentPage = 0
+        pc.numberOfPages = 4
+        pc.currentPageIndicatorTintColor = .mainGold
+        pc.pageIndicatorTintColor = .lightGray
+        return pc
         
     }()
     
@@ -78,8 +96,8 @@ class ViewController: UIViewController {
         topImageContainerView.addSubview(cameraImageView)
         
         NSLayoutConstraint.activate([
+            
             // top image view conatiner constraints
-
             topImageContainerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
             topImageContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             topImageContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -102,9 +120,11 @@ class ViewController: UIViewController {
     
     fileprivate func setupBottomControlsLayoyut() {
         
-        let bottomControlsStackView = UIStackView(arrangedSubviews: [previousButton, nextButton])
+        let bottomControlsStackView = UIStackView(arrangedSubviews: [previousButton, pageControl, nextButton])
         bottomControlsStackView.translatesAutoresizingMaskIntoConstraints = false
+        bottomControlsStackView.axis = .horizontal
         bottomControlsStackView.distribution = .fillEqually
+        
         
         view.addSubview(bottomControlsStackView)
         
